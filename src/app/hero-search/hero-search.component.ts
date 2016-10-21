@@ -6,11 +6,11 @@ import {Hero} from "../hero";
 import {Router} from "@angular/router";
 
 @Component({
-  moduleId: 'module.id',
   selector: 'hero-search',
   templateUrl: './hero-search.component.html',
-  styleUrls: ['./hero-search.component.css'],
-  providers: [HeroSearchService]
+  styleUrls: ['./hero-search.component.css']
+  // ,
+  // providers: [HeroSearchService]
 })
 export class HeroSearchComponent implements OnInit {
 
@@ -24,6 +24,7 @@ export class HeroSearchComponent implements OnInit {
   ) { }
 
   search(term: string): void {
+    console.log("Searching for ", term);
     this.searchTerms.next(term);
   }
 
@@ -34,7 +35,7 @@ export class HeroSearchComponent implements OnInit {
       .switchMap(term => term ? this.heroSearchService.search(term) : Observable.of<Hero[]>([]))
       .catch(error => {
         console.error(error);
-        return Observable.of<Hero[]>([])
+        return Observable.of<Hero[]>([]);
     });
   }
 
